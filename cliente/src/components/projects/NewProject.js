@@ -1,6 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
+import projectContext from '../../context/projects/projectContext'
 
 const NewProject = () => {
+
+    //Obtener el state del formulario
+    const projectsContext = useContext(projectContext);
+    const { form, showForm } = projectsContext;
 
     //definir state de los proyectos
     const [project, saveProject] = useState({
@@ -28,17 +33,25 @@ const NewProject = () => {
         //Reiniciar form
     }
 
+    //Mostrar formulario
+    const onClickForm = () => {
+        showForm()
+    }
 
     return (  
         <>
-            <button type='button' className='btn btn-block btn-primario'>Nuevo Proyecto</button>
-            <form className='formulario-nuevo-proyecto'>
-                <input type='text' className='input-text' placeholder='Nombre Proyecto' name='name' value={name} onChange={onChangeProject}/>
-                <input type='submit' className='btn btn-primario btn-block' value='Agregar Proyecto'/>
+            <button type='button' className='btn btn-block btn-primario' onClick={() => onClickForm()}>Nuevo Proyecto</button>
+                
+            {form ?
+                (
+                <form className='formulario-nuevo-proyecto'>
+                    <input type='text' className='input-text' placeholder='Nombre Proyecto' name='name' value={name} onChange={onChangeProject} />
+                    <input type='submit' className='btn btn-primario btn-block' value='Agregar Proyecto' />
 
-            </form>
-        
-        
+                </form>
+                )
+                : null
+            }
         </>
     );
 }
