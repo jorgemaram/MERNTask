@@ -1,3 +1,7 @@
 export const FORM_PROJECT = 'FORM_PROJECT';
 export const GET_PROJECTS = 'GET_PROJECTS';
-export const ADD_PROJECTS = 'ADD_PROJECTS';
+export const ADD_PROJECT = 'ADD_PROJECT';
+export const FORM_CHECK = 'FORM_CHECK';
+export const PRESENT_PROJECT = 'PRESENT_PROJECT';
+export const DELETE_PROJECT = 'DELETE_PROJECT';
+
