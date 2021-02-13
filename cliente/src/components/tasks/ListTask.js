@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import Task from './Task';
 import projectContext from '../../context/projects/projectContext';
 import taskContext from '../../context/tasks/taskContext';
@@ -14,11 +14,11 @@ const ListTaks = () => {
     const { tasksproject } = tasksContext;
 
     //Si no hay proyecto seleccionado
-    if (!project)  return <h2>Selecciona un proyecto</h2>
+    if (!project) return <h2>Selecciona un proyecto</h2>
 
 
     //Array destructuring para extraer el proyecto actual
-    const [presentProject] = project; 
+    const [presentProject] = project;
 
     //Eliminar proyecto
     const onClickDelete = () => {
@@ -32,7 +32,7 @@ const ListTaks = () => {
                 {tasksproject.length === 0
                     ? (<li className='tarea'><p>No hay tareas</p></li>)
                     : tasksproject.map(task => (
-                            <Task task={task} />))
+                        <Task key={task.id} task={task} />))
                 }
             </ul>
             <button type='button' className='btn btn-eliminar' onClick={onClickDelete}>Eliminar Proyecto &times;</button>
