@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import Task from './Task';
-import projectContext from '../../context/projects/projectContext'
+import projectContext from '../../context/projects/projectContext';
+import taskContext from '../../context/tasks/taskContext';
 
 const ListTaks = () => {
 
@@ -8,19 +9,16 @@ const ListTaks = () => {
     const projectsContext = useContext(projectContext);
     const { project, deleteProject } = projectsContext;
 
+    //Obetner las tareas del proyecto
+    const tasksContext = useContext(taskContext);
+    const { tasksproject } = tasksContext;
+
     //Si no hay proyecto seleccionado
     if (!project)  return <h2>Selecciona un proyecto</h2>
 
 
     //Array destructuring para extraer el proyecto actual
     const [presentProject] = project; 
-
-    const projectTasks = [
-        { name: 'Elegir plataforma', state: true },
-        { name: 'Elegir colores', state: false },
-        { name: 'Elegir plataforma de pago', state: false },
-        { name: 'Elegir hosting', state: true }
-    ]
 
     //Eliminar proyecto
     const onClickDelete = () => {
@@ -31,9 +29,9 @@ const ListTaks = () => {
         <>
             <h2>Proyecto: {presentProject.name}</h2>
             <ul className='listado-tareas'>
-                {projectTasks.length === 0
+                {tasksproject.length === 0
                     ? (<li className='tarea'><p>No hay tareas</p></li>)
-                    : projectTasks.map(task => (
+                    : tasksproject.map(task => (
                             <Task task={task} />))
                 }
             </ul>
