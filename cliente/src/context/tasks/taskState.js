@@ -1,8 +1,9 @@
 import React, { useReducer } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import taskContext from './taskContext';
 import taskReducer from './taskReducer';
 
-import { TASKS_PROJECT, ADD_TASKS, TASK_CHECK, DELETE_TASK } from '../../types'
+import { TASKS_PROJECT, ADD_TASKS, TASK_CHECK, DELETE_TASK, STATE_TASK, PRESENT_TASK, UPDATE_TASK, CLEAN_TASK} from '../../types'
 
 const TaskState = props => {
     const initialState = {
@@ -19,7 +20,8 @@ const TaskState = props => {
             { id: 10, name: 'Elegir colores', state: false, projectId: 4 },
         ],
         tasksproject: null,
-        errortask: false
+        errortask: false,
+        chosentask: null
     }
 
     //Crear dispatch y state
@@ -36,6 +38,7 @@ const TaskState = props => {
 
     //Añadir tareas al proyecto seleccionado
     const addTasks = task => {
+        task.id = uuidv4();
         dispatch({
             type: ADD_TASKS,
             payload: task
@@ -57,8 +60,39 @@ const TaskState = props => {
         })
     }
 
+    //Cambia estado de cada tarea
+    const changeStateTask = task => {
+        dispatch({
+            type: STATE_TASK,
+            payload: task
+        })
+    }
+
+    //Extrae tarea para edición
+    const savePresentTask = task => {
+        dispatch({
+            type: PRESENT_TASK,
+            payload: task
+        })
+    }
+
+    //Edita o modifica una tarea
+    const uploadTask = task => {
+        dispatch({
+            type: UPDATE_TASK,
+            payload: task
+        })
+    }
+
+    //Elimina tarea seleccionada
+    const cleanTask = () => {
+        dispatch({
+            type: CLEAN_TASK
+        })
+    }
+
     return (
-        <taskContext.Provider value={{ tasks: state.tasks, tasksproject: state.tasksproject, errortask: state.errortask, getTasks, addTasks, checkTask, deleteTask }}>
+        <taskContext.Provider value={{ tasks: state.tasks, tasksproject: state.tasksproject, errortask: state.errortask, chosentask: state.chosentask, getTasks, addTasks, checkTask, deleteTask, changeStateTask, savePresentTask, uploadTask, cleanTask }}>
             {props.children}
         </taskContext.Provider>
     )
