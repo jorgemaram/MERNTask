@@ -11,10 +11,11 @@ const connectDB = async () => {
         });
         console.log('DB conectada');
     } catch (error) {
+        console.log('hubo un error');
         console.log(error);
         proccess.exit(1); //Detener la app
     }
 
 }
 
-module.exports = connectDB
+module.exports = connectDB;
