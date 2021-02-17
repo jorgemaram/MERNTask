@@ -1,7 +1,7 @@
 //Rutas para autenticar usuarios
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/auth.controller');
+const authController = require('../controllers/authController');
 const { check } = require('express-validator')
 
 //Valida un usuario

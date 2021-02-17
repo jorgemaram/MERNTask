@@ -44,3 +44,4 @@ exports.authenticateUser = async (req, res) => {
         console.log(error)
     }
 }
+

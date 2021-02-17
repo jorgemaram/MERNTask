@@ -12,7 +12,7 @@ connectDB();
 app.use(express.json({ extended: true }));
 
 //puerto de la app
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 // Importar rutas 
 app.use('/api/usuarios', require('./routes/user.routes'))
