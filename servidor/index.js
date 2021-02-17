@@ -17,6 +17,7 @@ const port = process.env.PORT || 4000;
 // Importar rutas 
 app.use('/api/usuarios', require('./routes/user.routes'))
 app.use('/api/auth', require('./routes/auth.routes'))
+app.use('/api/proyectos', require('./routes/project.routes'))
 
 //arranque de la app
 app.listen(port, () => {
