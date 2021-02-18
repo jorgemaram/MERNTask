@@ -4,6 +4,7 @@ export const ADD_PROJECT = 'ADD_PROJECT';
 export const FORM_CHECK = 'FORM_CHECK';
 export const PRESENT_PROJECT = 'PRESENT_PROJECT';
 export const DELETE_PROJECT = 'DELETE_PROJECT';
+
 export const TASKS_PROJECT = 'TASKS_PROJECT';
 export const ADD_TASKS = 'ADD_TASKS';
 export const TASK_CHECK = 'TASK_CHECK';
@@ -13,3 +14,5 @@ export const PRESENT_TASK = 'PRESENT_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
 export const CLEAN_TASK = 'CLEAN_TASK';
 
+export const SHOW_ALERT = 'SHOW_ALERT';
+export const HIDE_ALERT = 'HIDE_ALERT';
