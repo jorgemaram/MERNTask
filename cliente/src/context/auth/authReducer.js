@@ -7,7 +7,9 @@ export default (state, action) => {
             return {
                 ...state, auth: true, message: null
             }
+        case ERROR_LOGIN:
         case ERROR_REGISTRATION:
+            localStorage.removeItem('token');
             return {
                 ...state, token: null, message: action.payload
             }
@@ -16,10 +18,6 @@ export default (state, action) => {
                 alert: null
             }
         case SUCCESFULL_LOGIN:
-            return {
-                alert: null
-            }
-        case ERROR_LOGIN:
             return {
                 alert: null
             }
