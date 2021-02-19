@@ -3,12 +3,13 @@ import { SUCCESFULL_REGISTRATION, ERROR_REGISTRATION, GET_USER, SUCCESFULL_LOGIN
 export default (state, action) => {
     switch (action.type) {
         case SUCCESFULL_REGISTRATION:
+            localStorage.setItem('token', action.payload.token);
             return {
-                alert: action.payload
+                ...state, auth: true, message: null
             }
         case ERROR_REGISTRATION:
             return {
-                alert: null
+                ...state, token: null, message: action.payload
             }
         case GET_USER:
             return {
