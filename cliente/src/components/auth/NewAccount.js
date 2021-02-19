@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import AlertContext from '../../context/alerts/alertContext';
 
 
 const NewAccount = () => {
+
+    //extraer valores del context
+    const alertContext = useContext(AlertContext);
+    const { alert, showAlert } = alertContext;
 
     //definir State para crear sesión
     const [user, saveUser] = useState({
@@ -26,13 +31,22 @@ const NewAccount = () => {
         e.preventDefault();
 
         //Validar campos completados
-
+        if (name.trim() === '' || email.trim() === '' || password.trim() === '' || confirm.trim() === '') {
+            showAlert('Todos los campos son obligatrios', 'alerta-error');
+            return;
+        }
 
         //Password mínimo 6 caracteres
-
+        if (password.length < 6) {
+            showAlert('El password debe ser de al menos 6 caracteres', 'alerta-error');
+            return;
+        }
 
         //Ambos passwords son iguales
-
+        if (password !== confirm) {
+            showAlert('La contraseña no coincide', 'alerta-error');
+            return;
+        }
 
         //Pasarlo al action
 
@@ -41,6 +55,7 @@ const NewAccount = () => {
 
     return (
         <div className='form-usuario'>
+            {alert ? (<div className={`alerta ${alert.category}`}>{alert.msg}</div>) : null}
             <div className='contenedor-form sombra-dark'>
                 <h1>Crea una cuenta</h1>
                 <form onSubmit={onSubmit}>
