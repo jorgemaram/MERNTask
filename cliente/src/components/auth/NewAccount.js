@@ -21,7 +21,7 @@ const NewAccount = (props) => {
         if (message) {
             showAlert(message.msg, message.category);
         }
-    }, [message, auth, props.history])
+    }, [message, auth, props.history]);
 
     //definir State para crear sesión
     const [user, saveUser] = useState({

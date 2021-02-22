@@ -1,24 +1,33 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import FormTask from '../tasks/FormTask';
 import ListTask from '../tasks/ListTask';
+import AuthContext from '../../context/auth/authContext';
 
 
 
 const Projects = () => {
+
+    //Extraer información de autenticación
+    const authContext = useContext(AuthContext);
+    const { userAuth } = authContext;
+
+    useEffect(() => {
+        userAuth();
+    }, [])
     return (
         <div className='contenedor-app'>
             <aside>
-                <Sidebar/>
+                <Sidebar />
 
             </aside>
             <div className='seccion-principal'>
-                <Navbar/>
+                <Navbar />
                 <main>
-                    <FormTask/>
+                    <FormTask />
                     <div className='contenedor-tareas'>
-                        <ListTask/>
+                        <ListTask />
                     </div>
                 </main>
             </div>
