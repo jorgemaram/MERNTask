@@ -4,6 +4,7 @@ export const ADD_PROJECT = 'ADD_PROJECT';
 export const FORM_CHECK = 'FORM_CHECK';
 export const PRESENT_PROJECT = 'PRESENT_PROJECT';
 export const DELETE_PROJECT = 'DELETE_PROJECT';
+export const PROJECT_ERROR = 'PROJECT_ERROR';
 
 export const TASKS_PROJECT = 'TASKS_PROJECT';
 export const ADD_TASKS = 'ADD_TASKS';

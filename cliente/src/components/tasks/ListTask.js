@@ -23,7 +23,7 @@ const ListTaks = () => {
 
     //Eliminar proyecto
     const onClickDelete = () => {
-        deleteProject(presentProject.id)
+        deleteProject(presentProject._id)
     }
 
     return (
