@@ -6,9 +6,9 @@ module.exports = function (req, res, next) {
 
     //Revisar si no hay token
     if (!token) {
-        return res.status(401).json({msg: 'No hay token, permiso no válido'})
+        return res.status(401).json({ msg: 'No hay token, permiso no válido' })
     }
-    
+
     //Validar el token
     try {
         const coded = jwt.verify(token, process.env.SECRET);

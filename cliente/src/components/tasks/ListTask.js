@@ -15,7 +15,7 @@ const ListTaks = () => {
     const { tasksproject } = tasksContext;
 
     //Si no hay proyecto seleccionado
-    if (!project) return <h2>Selecciona un proyecto</h2>
+    if (!project) return <h2>Selecciona un proyecto</h2>;
 
 
     //Array destructuring para extraer el proyecto actual
@@ -30,10 +30,11 @@ const ListTaks = () => {
         <>
             <h2>Proyecto: {presentProject.name}</h2>
             <ul className='listado-tareas'>
-                {tasksproject.length === 0
+                {tasksproject === 0
                     ? (<li className='tarea'><p>No hay tareas</p></li>)
-                    : <TransitionGroup>
-                        {tasksproject.map(task => (
+                    :
+                    <TransitionGroup>
+                    {tasksproject.map(task => (
                             <CSSTransition key={task.id} timeout={200} classNames='tarea'>
                                 <Task task={task} />
                             </CSSTransition>))}

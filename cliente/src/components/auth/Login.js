@@ -4,7 +4,7 @@ import AlertContext from '../../context/alerts/alertContext';
 import AuthContext from '../../context/auth/authContext';
 
 
-const Login = props => {
+const Login = (props) => {
 
     //extraer valores del context
     const alertContext = useContext(AlertContext);
@@ -21,6 +21,7 @@ const Login = props => {
         if (message) {
             showAlert(message.msg, message.category);
         }
+        // eslint-disable-next-line
     }, [message, auth, props.history]);
 
     //definir State para iniciar sesión
@@ -43,12 +44,12 @@ const Login = props => {
         e.preventDefault();
 
         //Validar campos completados
-        if (email.trim() === '' || password.trim() === '') {
+        if(email.trim() === '' || password.trim() === '') {
             showAlert('Todos los campos son obligatorios', 'alerta-error');
         }
         
         //Pasarlo al action
-
+        loginUser({ email, password });
 
     }
 

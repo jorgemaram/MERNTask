@@ -20,6 +20,7 @@ const ListProjects = () => {
             showAlert(message.msg, message.category)
         }
         getProjects();
+        // eslint-disable-next-line
     }, [message])
     
     //Comprobar si proyectos tiene contenido
@@ -27,7 +28,7 @@ const ListProjects = () => {
 
     return ( 
         <ul className='listado-proyectos'>
-            {alert ? (<div className={`alerta ${alert.category}`}>{alert.message}</div>) : null}
+            {alert ? (<div className={`alerta ${alert.category}`}>{alert.msg}</div>) : null}
             <TransitionGroup>
                 {projects.map(project => (
                     <CSSTransition key={project._id} timeout={200} classNames='proyecto'>

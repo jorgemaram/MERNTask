@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import projectContext from '../../context/projects/projectContext'
+import projectContext from '../../context/projects/projectContext';
 
 const NewProject = () => {
 
@@ -18,7 +18,7 @@ const NewProject = () => {
     //Lee contenidos del input
     const onChangeProject = e => {
         saveProject({
-            ...project, [e.target.name]: e.target.value
+            ...project, [e.target.name] : e.target.value
         })
     }
 
@@ -27,7 +27,7 @@ const NewProject = () => {
         e.preventDefault();
 
         //Validar proyecto
-        if (name === '') {
+        if(name === '') {
             showError();
             return;
         }

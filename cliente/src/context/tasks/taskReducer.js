@@ -1,5 +1,4 @@
-import { TASKS_PROJECT, ADD_TASKS, TASK_CHECK, DELETE_TASK, STATE_TASK, PRESENT_TASK, UPDATE_TASK, CLEAN_TASK} from '../../types'
-import TaskState from './taskState'
+import { TASKS_PROJECT, ADD_TASKS, TASK_CHECK, DELETE_TASK, PRESENT_TASK, UPDATE_TASK, CLEAN_TASK} from '../../types'
 
 
 export default (state, action) => {
@@ -7,12 +6,12 @@ export default (state, action) => {
         case TASKS_PROJECT:
             return {
                 ...state,
-                tasksproject: state.tasks.filter(task => task.projectId === action.payload)
+                tasksproject: action.payload
             }
         case ADD_TASKS:
             return {
                 ...state,
-                tasks: [...state.tasks, action.payload],
+                tasksproject: [...state.tasksproject, action.payload],
                 errortask: false
             }
         case TASK_CHECK:
@@ -23,13 +22,12 @@ export default (state, action) => {
         case DELETE_TASK:
             return {
                 ...state,
-                tasks: state.tasks.filter(task => task.id !== action.payload)
+                tasksproject: state.tasksproject.filter(task => task._id !== action.payload)
             }
         case UPDATE_TASK:
-        case STATE_TASK:
             return {
                 ...state,
-                tasks: state.tasks.map(task => task.id === action.payload.id ? action.payload : task)
+                tasksproject: state.tasksproject.map(task => task._id === action.payload._id ? action.payload : task)
             }
         case PRESENT_TASK:
             return {

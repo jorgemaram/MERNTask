@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
-import authContext from './authContext';
-import authReducer from './authReducer'
-import { SUCCESFULL_REGISTRATION, ERROR_REGISTRATION, GET_USER, SUCCESFULL_LOGIN, ERROR_LOGIN, LOGOUT } from "../../types";
+import AuthContext from './authContext';
+import AuthReducer from './authReducer'
+import { SUCCESFULL_REGISTRATION, ERROR_REGISTRATION, GET_USER, SUCCESFULL_LOGIN, ERROR_LOGIN, LOGOUT } from '../../types';
 import clientAxios from '../../config/axios';
 import tokenAuth from '../../config/tokenAuth'; 
 
@@ -14,13 +14,14 @@ const AuthState = props => {
         loading: true,
     }
 
-    const [state, dispatch] = useReducer(authReducer, initialState);
+    const [state, dispatch] = useReducer(AuthReducer, initialState);
 
     //Funciones
     const registerUser = async data => {
         try {
             const answer = await clientAxios.post('api/usuarios', data);
-            console.log(answer.data)
+            console.log(answer.data);
+
             dispatch({
                 type: SUCCESFULL_REGISTRATION,
                 payload: answer.data
@@ -28,7 +29,6 @@ const AuthState = props => {
             //Obtener usuario
             userAuth();
         }catch (error){
-            //console.log(error.response);
             const alert = {
                 msg: error.response.data.msg,
                 category: 'alerta-error'
@@ -43,7 +43,7 @@ const AuthState = props => {
     //Retorna el usuario autenticado
     const userAuth = async () => {
         const token = localStorage.getItem('token');
-        if (token) {
+        if(token) {
             tokenAuth(token);
         }
         try {
@@ -53,7 +53,7 @@ const AuthState = props => {
                 payload: answer.data.user
             })
         } catch (error) {
-            console.log(error)
+            console.log(error.response)
             dispatch({
                 type:ERROR_LOGIN
             })
@@ -71,7 +71,7 @@ const AuthState = props => {
             userAuth();
         } catch (error) {
             const alert = {
-                msg: error.answer.data.msg,
+                msg: error.response.data.msg,
                 category: 'alerta-error'
             }
             dispatch({
@@ -89,9 +89,9 @@ const AuthState = props => {
     }
 
     return (
-        <authContext.Provider value={{ token: state.token, auth: state.auth, user: state.user, message: state.message, loading:state.loading, registerUser, loginUser, userAuth, logoutUser}}>
+        <AuthContext.Provider value={{ token: state.token, auth: state.auth, user: state.user, message: state.message, loading:state.loading, registerUser, loginUser, userAuth, logoutUser}}>
             {props.children}
-        </authContext.Provider>
+        </AuthContext.Provider>
     )
 }
 export default AuthState; 

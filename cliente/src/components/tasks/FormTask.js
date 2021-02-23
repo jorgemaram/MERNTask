@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import projectContext from '../../context/projects/projectContext'
-import taskContext from '../../context/tasks/taskContext'
+import projectContext from '../../context/projects/projectContext';
+import taskContext from '../../context/tasks/taskContext';
 
 const FormTarea = () => {
 
@@ -10,12 +10,12 @@ const FormTarea = () => {
 
     //Obetner la función del context de tarea
     const tasksContext = useContext(taskContext);
-    const { errortask, chosentask, addTasks, getTasks, checkTask, uploadTask, cleanTask } = tasksContext;
+    const { errortask, chosentask, addTasks, getTasks, checkTask, updateTask, cleanTask } = tasksContext;
 
 
     //Effect del formulario
     useEffect(() => {
-        if (chosentask !== null) {
+        if(chosentask !== null) {
             saveTask(chosentask)
         } else {
             saveTask({
@@ -41,27 +41,26 @@ const FormTarea = () => {
 
     //Leer valores del formulario
     const handleChange = e => {
-        saveTask({ ...task, [e.target.name]: e.target.value })
+        saveTask({ ...task, [e.target.name] : e.target.value })
     }
 
     const onSubmit = e => {
         e.preventDefault();
 
         //validar
-        if (name.trim() === '') {
+        if(name.trim() === '') {
             checkTask();
             return;
         }
 
         //Si es edición o si es nueva tarea
-        if (chosentask === null) {
+        if(chosentask === null) {
             //agregar al state de tareas
-            task.projectId = presentProject.id;
-            task.state = false
+            task.project = presentProject._id;
             addTasks(task);
         } else {
             // actualizar tarea existente
-            uploadTask(task);
+            updateTask(task);
             //elimina tarea seleccionada del state
             cleanTask();
         }

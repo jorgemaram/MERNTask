@@ -12,13 +12,13 @@ exports.createUser = async (req, res) => {
     }
  
     //extraer email y password
-    const {email, password} = req.body
+    const { email, password } = req.body;
 
     try {
         //revisar que el usuario sea único
         let user = await User.findOne({ email });
 
-        if (user) {
+        if(user) {
             return res.status(400).json({ msg: 'El usuario ya existe' });
         }
 
@@ -42,13 +42,10 @@ exports.createUser = async (req, res) => {
         jwt.sign(payload, process.env.SECRET, {
             expiresIn: 3600 //1 hora
         }, (error, token) => {
-                if (error) throw error;
-                //Mensaje de confrimación
-                res.json({ token});
-        })
-
-        //Mensaje de confrimación
-        res.json({ msg: 'Usuario creado correctamente' });
+            if (error) throw error;
+            //Mensaje de confrimación
+            res.json({ token });
+        });
 
     }catch (error) {
         console.log(error);

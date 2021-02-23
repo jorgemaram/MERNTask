@@ -10,14 +10,14 @@ const Task = ({ task }) => {
 
     //Obetner la función del context de tarea
     const tasksContext = useContext(taskContext);
-    const { deleteTask, getTasks, changeStateTask, savePresentTask } = tasksContext;
+    const { deleteTask, getTasks, updateTask, savePresentTask } = tasksContext;
 
     //Extraer el proyecto
     const [presentProject] = project;
 
     //Función que se ejecuta cuando el usuario presiona el botón de eliminar tarea
     const deleteATask = id => {
-        deleteTask(id);
+        deleteTask(id, presentProject._id);
         getTasks(presentProject.id)
     }
 
@@ -28,7 +28,7 @@ const Task = ({ task }) => {
         } else {
             task.state = true;
         }
-        changeStateTask(task)
+        updateTask(task)
     }
 
     //Añade tarea actual cuando el usuario quiere editarla
@@ -36,18 +36,18 @@ const Task = ({ task }) => {
         savePresentTask(task);
     }
 
-    return ( 
+    return (
         <li className='tarea sombra'>
             <p>{task.name}</p>
             <div className='estado'>
                 {task.state ? (<button type='button' className='completo' onClick={() => changeState(task)}>Completo</button>) : (<button type='button' className='incompleto' onClick={() => changeState(task)}>Incompleto</button>)}
             </div>
             <div className='acciones'>
-                <button type='button' className='btn btn-primario' onClick={() => chooseTask(task) }>Editar</button>
-                <button type='button' className='btn btn-secundario' onClick={() => deleteATask(task.id)}>Eliminar</button>
+                <button type='button' className='btn btn-primario' onClick={() => chooseTask(task)}>Editar</button>
+                <button type='button' className='btn btn-secundario' onClick={() => deleteATask(task._id)}>Eliminar</button>
             </div>
         </li>
-     );
+    );
 }
- 
+
 export default Task;

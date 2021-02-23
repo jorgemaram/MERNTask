@@ -7,7 +7,8 @@ const { check } = require('express-validator');
 //api/proyectos
 //Crea un proyecto
 router.post('/',
-    auth, [
+    auth,
+    [
     check('name', 'El nombre del proyecto es obligatorio').not().isEmpty()
     ],
     projectController.createProject

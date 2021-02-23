@@ -61,29 +61,28 @@ exports.updateProject = async (req, res) => {
         let project = await Project.findById(req.params.id);
 
         //Si el proyecto existe o no
-        if (!project) {
+        if(!project) {
             return res.status(404).json({ msg: 'Proyecto no encontrado' })
         }
 
         //Verificar el creador del proyecto
-        if (project.owner.toString() !== req.user.id) {
-            return res.status(401).json({ msg: 'No autorizado' })
+        if(project.owner.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'No autorizado' });
         }
         //Actualizar
-        project = await Project.findByIdAndUpdate({ _id: req.params.id }, { $set: newProject }, { new: true })
+        project = await Project.findByIdAndUpdate({ _id: req.params.id }, { $set: newProject }, { new: true });
 
-        res.json({ project })
+        res.json({ project });
         
     } catch (error) {
         console.log(error);
-        res.status(500).send('Error en el servidor')
+        res.status(500).send('Error en el servidor');
     }
 }
 
 //Eliminar un proyecto por su ID
 exports.deleteProject = async (req, res) => {
     try {
-
         //Revisar el ID
         let project = await Project.findById(req.params.id);
 
@@ -97,7 +96,7 @@ exports.deleteProject = async (req, res) => {
             return res.status(401).json({ msg: 'No autorizado' })
         }
         //Borrar proyecto
-        await Project.findOneAndRemove({ _id: req.params.id })
+        await Project.findOneAndRemove({ _id: req.params.id });
 
         res.json({ msg: 'Proyecto eliminado.' })
 

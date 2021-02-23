@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alerts/alertContext';
-import AuthContext from '../../context/auth/authContext'
+import AuthContext from '../../context/auth/authContext';
 
 
 const NewAccount = (props) => {
@@ -15,12 +15,13 @@ const NewAccount = (props) => {
 
     //En caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
     useEffect(() => {
-        if (auth) {
+        if(auth) {
             props.history.push('/proyectos');
         }
-        if (message) {
+        if(message) {
             showAlert(message.msg, message.category);
         }
+        // eslint-disable-next-line
     }, [message, auth, props.history]);
 
     //definir State para crear sesión
@@ -51,13 +52,13 @@ const NewAccount = (props) => {
         }
 
         //Password mínimo 6 caracteres
-        if (password.length < 6) {
+        if(password.length < 6) {
             showAlert('El password debe ser de al menos 6 caracteres', 'alerta-error');
             return;
         }
 
-        //Ambos passwords son iguales
-        if (password !== confirm) {
+        //Ambos passwords no son iguales
+        if(password !== confirm) {
             showAlert('La contraseña no coincide', 'alerta-error');
             return;
         }
